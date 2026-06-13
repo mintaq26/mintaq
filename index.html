@@ -167,8 +167,20 @@
             100% { transform: scale(1.1) rotate(-6deg) translateY(-5px); }
         }
 
-        .student-name::before { content: var(--STUDENT_NAME); font-weight: 900; font-size: 20px; color: var(--text-dark); }
-        .student-title::before { content: var(--STUDENT_LEVEL); font-weight: 700; font-size: 13px; color: var(--color-primary); display: block; margin-top: 4px; }
+        
+.student-name {
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--text-dark);
+}
+       
+.student-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--color-primary);
+    display: block;
+    margin-top: 4px;
+}
 
         /* شريط مهارات البطل وتأثير اللمعان */
         .xp-container { width: 100%; margin-top: 15px; background: #F8F7F5; padding: 12px; border-radius: 20px; border: 1.5px solid rgba(163, 99, 97, 0.05); }
