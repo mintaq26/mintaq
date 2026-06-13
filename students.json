@@ -1,15 +1,4 @@
-{
-  "students": [
-    {
-      "id": "1",
-      "name": "سعيد بن محمد الهلالي",
-      "stage": 1,
-      "image": "images/seed.jpeg",
-      "drive": "https://drive.google.com/",
-      "indicator": [72, 75, 80, 78, 85, 88]
-    }
-  ]
-}
+
 {
   "1001": {
     "name": "سعيد بن محمد الهلالي",
