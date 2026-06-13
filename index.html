@@ -1,5 +1,6 @@
 ﻿
 
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -546,5 +547,27 @@
         }
     });
 </script>
+<script>
+async function loadStudent() {
+
+    const params = new URLSearchParams(window.location.search);
+    const studentId = params.get("id") || "1001";
+
+    const response = await fetch("students.json");
+    const students = await response.json();
+
+    const student = students[studentId];
+
+    if (!student) {
+        alert("الطالب غير موجود");
+        return;
+    }
+
+    console.log(student);
+}
+
+loadStudent();
+</script>
 </body>
+
 </html>
