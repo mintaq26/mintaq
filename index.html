@@ -557,6 +557,10 @@ async function loadStudent() {
     const students = await response.json();
 
     const student = students[studentId];
+document.documentElement.style.setProperty(
+    '--STUDENT_NAME',
+    `"${student.name}"`
+);
 
     if (!student) {
         alert("الطالب غير موجود");
