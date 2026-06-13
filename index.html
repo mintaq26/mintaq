@@ -350,7 +350,9 @@
             <div class="card profile-card">
                 <div class="profile-avatar-container">
                     <div class="profile-avatar-inner">
-                        <img src="images/seed.jpeg" alt="بطل مِنطَاق العُماني">
+                        <img class="student-photo"
+     src="images/seed.jpeg"
+     alt="بطل مِنطَاق العُماني">
                     </div>
                 </div>
                 
@@ -573,6 +575,12 @@ console.log(student.image);
 console.log(student.stage);
 console.log(student.drive);
 console.log(student.speed);
+document.querySelector(".student-name").textContent =
+    student.name;
+document.querySelector(".student-photo").src =
+    student.image;
+document.querySelector(".student-stage").textContent =
+    "المرحلة " + student.stage;
 }
 
 loadStudent();
