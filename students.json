@@ -7,4 +7,13 @@
     "drive": "https://drive.google.com/xxxxx",
     "speed": [35, 60, 0, 0, 0, 0]
   }
+  ,
+
+  "1002": {
+    "name": "أحمد",
+    "stage": 2,
+    "image": "images/ahmed.png",
+    "drive": "https://drive.google.com/yyyyy",
+    "speed": [50, 55, 60, 65, 70, 75]
+  }
 }
