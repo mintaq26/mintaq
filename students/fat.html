@@ -1,0 +1,551 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>منصة مِنطَاق - تقرير الأداء الأسبوعي المطور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           صندوق التحكم السريع بالبيانات والدرجات
+           ========================================================================== */
+        :root {
+            --STUDENT_NAME: "فاطمة الزهراء بنت محمد الهلالي";
+            --STUDENT_LEVEL: "البطل اللغوي الواعد 🎯";
+            --CURRENT_STAGE: "١"; 
+            --BAR_PERCENTAGE: "75%"; 
+            --STRENGTH_1: "مخارج الحروف ونطق الراء والضاد ممتاز وسليم 🌟";
+            --STRENGTH_2: "ثقة عالية ونطق معبر أثناء الإلقاء أمام زملائه 🎤";
+            --WEAKNESS_1: "بحاجة لزيادة التدريب على فصل الكلمات الطويلة 🚀";
+            --WEAKNESS_2: "التردد قليلاً عند قراءة التنوين والحركات المركبة ⏳";
+        }
+
+        /* باليت الألوان الجديد المستوحى بالكامل من الصورة المرفقة */
+        :root {
+            --bg-main: #F2EFE9;          
+            --color-primary: #A36361;    
+            
+            /* درجات المحطات الباستيلية الناعمة من الباليت */
+            --color-soft-1: #9EABA2;
+            --color-soft-2: #BDD1C5;
+            --color-soft-3: #EECC8C;  
+            --color-soft-4: #E8B298;  
+            --color-soft-5: #D3A29D;  
+            
+            --color-accent: #A36361;
+            --text-dark: #3E3B39;        
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }        
+        
+        body { 
+            background: linear-gradient(135deg, #F2EFE9 0%, #BDD1C5 100%);
+            padding: 30px 15px; 
+            display: flex; 
+            justify-content: center; 
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* الفقاعات اللامعة متناغمة مع الألوان الجديدة */
+        .balloon-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 32px; height: 42px;
+            border-radius: 50%;
+            opacity: 0.65; 
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9)) saturate(1.2);
+            animation: floatUp 10s infinite ease-in;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            15% { opacity: 0.75; }
+            85% { opacity: 0.75; }
+            100% { transform: translateY(-115vh) rotate(25deg) scale(1.1); opacity: 0; }
+        }
+
+        /* لوحة العرض الكبرى */
+        .dashboard-container {
+            width: 100%;
+            max-width: 1300px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            border-radius: 35px; 
+            box-shadow: 0 20px 60px rgba(163, 99, 97, 0.1);
+            padding: 35px;
+            border: 4px solid #FFFFFF;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* الترويسة المنسجمة */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(158, 171, 162, 0.15) 0%, rgba(232, 178, 152, 0.1) 100%);
+            border: 2px solid #FFF;
+            padding: 20px 30px;
+            border-radius: 24px;
+            margin-bottom: 35px;
+            box-shadow: inset 0 0 15px rgba(255,255,255,0.6);
+        }
+        .header-right h1 { font-size: 36px; font-weight: 900; color: var(--text-dark); display: flex; gap: 2px; }
+        
+        /* تلوين حروف كلمة منطاق بشكل منفصل مبهج */
+        .mantaq-title span:nth-child(1) { color: #A36361; }
+        .mantaq-title span:nth-child(2) { color: #E8B298; }
+        .mantaq-title span:nth-child(3) { color: #EECC8C; }
+        .mantaq-title span:nth-child(4) { color: #9EABA2; }
+        .mantaq-title span:nth-child(5) { color: #A36361; }
+
+        .header-center { text-align: center; }
+        .header-center .main-slogan { font-size: 20px; font-weight: 900; color: var(--text-dark); animation: pulseSlogan 3s infinite alternate; }
+        @keyframes pulseSlogan { from { transform: scale(1); } to { transform: scale(1.02); } }
+        .header-center .sub-slogan { font-weight: 700; color: var(--color-primary); font-size: 13px; margin-top: 4px; }
+        .header-left img { height: 70px; object-fit: contain; }
+
+        /* هيكل شبكة العرض */
+        .main-grid { display: grid; grid-template-columns: 320px 1fr 1fr; gap: 30px; }
+        .column-center, .column-left { display: flex; flex-direction: column; gap: 30px; }
+
+        /* تأثيرات مشعة متناسقة مع الهوية الجديدة الكلاسيكية الناعمة */
+        .card {
+            background: #FFFFFF;
+            border: 2px solid rgba(163, 99, 97, 0.08);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.01);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--color-primary);
+            box-shadow: 0 0 25px rgba(163, 99, 97, 0.25), 0 10px 30px rgba(163, 99, 97, 0.1);
+        }
+        .card-title { font-size: 17px; font-weight: 900; color: var(--text-dark); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+        .card-title i { color: var(--color-primary); }
+
+        /* حركة الأفاتار الحيوية */
+        .profile-card { text-align: center; background: linear-gradient(180deg, #FCFBFF 0%, #FFFFFF 100%); border: 2px solid rgba(163, 99, 97, 0.1); display: flex; flex-direction: column; align-items: center; }
+        
+        .profile-avatar-container {
+            width: 125px; height: 125px;
+            border-radius: 50%;
+            position: relative;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--color-soft-5), var(--color-soft-3), var(--color-soft-1));
+            box-shadow: 0 6px 20px rgba(163, 99, 97, 0.15);
+            margin-bottom: 15px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .profile-avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: #FFF; overflow: hidden; border: 2px solid #FFF; }
+        .profile-avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+
+        .profile-card:hover .profile-avatar-container {
+            transform: scale(1.1) rotate(8deg);
+            box-shadow: 0 0 25px rgba(232, 178, 152, 0.45);
+            animation: avatarPlayful 0.6s infinite alternate;
+            animation-delay: 0.4s;
+        }
+        @keyframes avatarPlayful {
+            0% { transform: scale(1.1) rotate(6deg) translateY(0); }
+            100% { transform: scale(1.1) rotate(-6deg) translateY(-5px); }
+        }
+
+        .student-name::before { content: var(--STUDENT_NAME); font-weight: 900; font-size: 20px; color: var(--text-dark); }
+        .student-title::before { content: var(--STUDENT_LEVEL); font-weight: 700; font-size: 13px; color: var(--color-primary); display: block; margin-top: 4px; }
+
+        /* شريط مهارات البطل وتأثير اللمعان */
+        .xp-container { width: 100%; margin-top: 15px; background: #F8F7F5; padding: 12px; border-radius: 20px; border: 1.5px solid rgba(163, 99, 97, 0.05); }
+        .xp-text { font-size: 12px; font-weight: 900; color: var(--text-dark); text-align: right; margin-bottom: 8px; }
+        .xp-bar-bg { width: 100%; height: 16px; background: #EAE8E5; border-radius: 12px; overflow: hidden; border: 1.5px solid #FFF; position: relative; }
+        .xp-bar-fill { 
+            height: 100%; width: var(--BAR_PERCENTAGE); 
+            background: linear-gradient(90deg, var(--color-soft-4), var(--color-primary)); 
+            border-radius: 12px; position: relative; overflow: hidden;
+        }
+        .xp-bar-fill::after {
+            content: ''; position: absolute; top: 0; left: -150px; width: 80px; height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg); animation: shimmerEffect 2.2s infinite linear;
+        }
+        @keyframes shimmerEffect { 0% { left: -150px; } 100% { left: 100%; } }
+
+        /* مؤشر حماس البطل */
+        .quest-container { width: 100%; margin-top: 12px; background: rgba(232, 178, 152, 0.04); padding: 12px; border-radius: 18px; border: 2px dashed var(--color-soft-4); position: relative; }
+        .quest-title { font-size: 12px; font-weight: 900; color: var(--text-dark); text-align: right; margin-bottom: 6px; }
+        .quest-bar-bg { width: 100%; height: 24px; background: #FFF; border-radius: 50px; border: 1.5px solid rgba(163, 99, 97, 0.15); position: relative; overflow: hidden; display: flex; align-items: center; }
+        .quest-bar-fill { height: 100%; width: 100%; background: linear-gradient(90deg, transparent, rgba(232, 178, 152, 0.2)); position: absolute; top: 0; right: 0; animation: fillAndEmpty 4s infinite ease-in-out; transform-origin: right; }
+        .rocket-emoji { position: absolute; top: -2px; right: 0; font-size: 14px; animation: rocketFly 4s infinite ease-in-out; }
+        @keyframes fillAndEmpty { 0% { transform: scaleX(0); } 50% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+        @keyframes rocketFly { 0% { right: 0%; } 50% { right: 85%; } 100% { right: 0%; } }
+
+        /* المحطات بناءً على الباليت الجديد وتأثير المرور المتميز */
+        .station-list { display: flex; flex-direction: column; gap: 10px; }
+        .station-link-wrapper { text-decoration: none; color: inherit; display: block; }
+        
+        .station-row { 
+            border-radius: 16px; 
+            padding: 12px 18px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+        }
+        
+        /* تلوين الافتراضي بناءً على التناغم مع الصورة */
+        .st-wahi { background-color: rgba(158, 171, 162, 0.25); border: 1.5px solid rgba(158, 171, 162, 0.4); }
+        .st-farahidi { background-color: rgba(238, 204, 140, 0.25); border: 1.5px solid rgba(238, 204, 140, 0.4); }
+        .st-adab { background-color: rgba(232, 178, 152, 0.25); border: 1.5px solid rgba(232, 178, 152, 0.4); }
+        .st-estima { background-color: rgba(211, 162, 157, 0.25); border: 1.5px solid rgba(211, 162, 157, 0.4); }
+        .st-nadi { background-color: rgba(189, 209, 197, 0.35); border: 1.5px solid rgba(189, 209, 197, 0.5); }
+
+        /* تأثير المرور (أغمق، مشع، متوهج هندسياً) */
+        .station-link-wrapper:hover .st-wahi { background-color: #9EABA2; border-color: #7A877E; box-shadow: 0 0 15px rgba(158, 171, 162, 0.4); transform: scale(1.02); }
+        .station-link-wrapper:hover .st-farahidi { background-color: #EECC8C; border-color: #D6B474; box-shadow: 0 0 15px rgba(238, 204, 140, 0.5); transform: scale(1.02); }
+        .station-link-wrapper:hover .st-adab { background-color: #E8B298; border-color: #CE9980; box-shadow: 0 0 15px rgba(232, 178, 152, 0.4); transform: scale(1.02); }
+        .station-link-wrapper:hover .st-estima { background-color: #D3A29D; border-color: #B98A85; box-shadow: 0 0 15px rgba(211, 162, 157, 0.4); transform: scale(1.02); }
+        .station-link-wrapper:hover .st-nadi { background-color: #BDD1C5; border-color: #A3B9AB; box-shadow: 0 0 15px rgba(189, 209, 197, 0.4); transform: scale(1.02); }
+
+        .station-details h4 { font-size: 15px; font-weight: 900; color: var(--text-dark); }
+        .station-details p { font-size: 11px; color: #524E4C; font-weight: 700; margin-top: 1px; }
+        
+        /* شارة الحالة - بيج/رمادي فاتح موحد وناعم لإبراز علامة الصح الخضراء بوضوح تام */
+        .status-badge { color: #3E3B39; padding: 5px 12px; border-radius: 50px; font-size: 11px; font-weight: 900; display: flex; align-items: center; gap: 4px; }
+        .bg-btn-wahi { background: linear-gradient(135deg, var(--color-soft-4), var(--color-primary)); color: #FFF; }
+        .bg-btn-normal { background: #BDD1C5; border: 1.5px solid rgba(158, 171, 162, 0.3); }
+
+        /* أيقونة الصح الخضراء الدوّارة المشعة والمستمرة */
+        .fa-circle-check {
+            animation: spinAndGleam 2.5s infinite linear;
+            display: inline-block;
+            color: #2D8A6B;
+            filter: drop-shadow(0 0 3px rgba(45, 138, 107, 0.8));
+        }
+        @keyframes spinAndGleam {
+            0% { transform: rotate(0deg) scale(1); filter: brightness(1); }
+            50% { transform: rotate(180deg) scale(1.2); filter: brightness(1.4) drop-shadow(0 0 6px #2D8A6B); }
+            100% { transform: rotate(360deg) scale(1); filter: brightness(1); }
+        }
+
+        /* كتل التقييمات */
+        .feedback-box { display: flex; flex-direction: column; gap: 10px; }
+        .feedback-item { padding: 12px 16px; border-radius: 16px; font-size: 12px; font-weight: 700; line-height: 1.5; }
+        
+        /* استدعاء متغيرات الـ Root بشكل تلقائي وديناميكي داخل الصناديق */
+        #str1::before { content: var(--STRENGTH_1); }
+        #str2::before { content: var(--STRENGTH_2); }
+        #wk1::before { content: var(--WEAKNESS_1); }
+        #wk2::before { content: var(--WEAKNESS_2); }
+
+        .feedback-item.strength { background: rgba(158, 171, 162, 0.15); border: 1.5px solid rgba(158, 171, 162, 0.4); color: #35423A; }
+        .feedback-item.weakness { background: rgba(232, 178, 152, 0.12); border: 1.5px solid rgba(232, 178, 152, 0.3); color: #6D4330; }
+
+        /* مربع مهام نهاية الأسبوع */
+        .weekend-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FAF9F7 100%);
+            border: 2px dashed var(--color-primary);
+            position: relative;
+        }
+        .weekend-card::before {
+            content: '⬢';
+            position: absolute;
+            top: 10px; left: 15px;
+            font-size: 28px;
+            color: rgba(163, 99, 97, 0.1);
+            font-family: Arial, sans-serif;
+        }
+        .tasks-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+        .task-box {
+            background: #FFFFFF;
+            border: 1.5px solid #EAE6E2;
+            border-radius: 16px;
+            padding: 12px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .task-title-text { font-size: 13px; font-weight: 900; color: var(--text-dark); display: flex; align-items: center; gap: 6px; }
+        .task-options { display: flex; gap: 10px; }
+        .btn-opt {
+            flex: 1; padding: 6px; border: 1.5px solid #EAE6E2; border-radius: 50px;
+            font-size: 11px; font-weight: 900; cursor: pointer; background: #FFF; color: #524E4C;
+            display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.25s ease;
+        }
+        .btn-done:hover {
+            background-color: #EBF5F1; border-color: #2D8A6B; color: #2D8A6B; transform: scale(1.04);
+            box-shadow: 0 4px 10px rgba(45, 138, 107, 0.2);
+        }
+        .btn-not-done:hover {
+            background-color: #FDF1ED; border-color: #A36361; color: #A36361; transform: scale(1.04);
+            box-shadow: 0 4px 10px rgba(163, 99, 97, 0.2);
+        }
+        .btn-done.active { background-color: #2D8A6B !important; color: #FFF !important; border-color: #2D8A6B; }
+        .btn-not-done.active { background-color: #A36361 !important; color: #FFF !important; border-color: #A36361; }
+@media screen and (max-width: 768px) {
+
+    .main-grid{
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .header{
+        flex-direction:column;
+        text-align:center;
+        gap:15px;
+    }
+
+    .dashboard-container{
+        padding:15px;
+
+    }
+.btn-opt{
+    min-height: 48px;
+    font-size: 14px;
+    padding: 12px;
+}
+}
+    </style>
+</head>
+<body>
+
+<div class="balloon-container" id="balloonSpace"></div>
+<audio id="welcomeSound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" preload="auto"></audio>
+<audio id="popSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
+
+<div class="dashboard-container">
+    <div class="header">
+        <div class="header-right">
+            <h1 class="mantaq-title">منصة&nbsp;<span>مِ</span><span>نْ</span><span>طَ</span><span>ا</span><span>قْ</span></h1>
+        </div>
+        <div class="header-center">
+            <div class="main-slogan">مِنطَاق ... حَيْثُ نَصْنَعُ لِلْقِرَاءَةِ طَرِيقاً أَجْمَل ✨</div>
+            <div class="sub-slogan"><i class="fa-solid fa-mosque" style="color:var(--color-primary)"></i> المدرسة القرآنية الوقفية - ولاية العامرات | أجيال القرآن</div>
+        </div>
+        <div class="header-left">
+            <img src="../images/add.png" alt="شعار المدرسة القرآنية الوقفية">
+        </div>
+    </div>
+
+    <div class="main-grid">
+        <div class="sidebar-right-column" style="display: flex; flex-direction: column; gap: 30px;">
+            <div class="card profile-card">
+                <div class="profile-avatar-container">
+                    <div class="profile-avatar-inner">
+                        <img src="../images/fat.png" alt="بطل مِنطَاق العُماني">
+                    </div>
+                </div>
+                
+                <div class="student-name"></div>
+                <div class="student-title"></div>
+                
+                <div class="xp-container">
+                    <div class="xp-text">معدل نمو مهارات البطل بالأسبوع</div>
+                    <div class="xp-bar-bg">
+                        <div class="xp-bar-fill"></div>
+                    </div>
+                    <div style="font-size: 13px; font-weight: 900; color: #FFF; margin-top: 12px; background: var(--text-dark); padding: 4px 16px; border-radius: 50px; display: inline-block;">
+                        🏅 المَرْحَلَة <span id="stageNum"></span>
+                    </div>
+                </div>
+
+                <div class="quest-container">
+                    <div class="quest-title">🔥 مؤشر حماس البطل للأسبوع القادم:</div>
+                    <div class="quest-bar-bg">
+                        <div class="quest-bar-fill"></div>
+                        <div class="rocket-emoji">🚀</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card weekend-card">
+                <div class="card-title"><i class="fa-solid fa-cubes"></i> مهام نهاية الأسبوع</div>
+                <div class="tasks-grid">
+                    <div class="task-box">
+                        <div class="task-title-text">📖 مراجعة الآيات من ١-٥</div>
+                        <div class="task-options">
+                            <button class="btn-opt btn-done" onclick="toggleTask(this, 'done')">أنجزت 🎉</button>
+                            <button class="btn-opt btn-not-done" onclick="toggleTask(this, 'not')">لم أنجز ⏱️</button>
+                        </div>
+                    </div>
+                    <div class="task-box">
+                        <div class="task-title-text">📚 قراءة قصة قصيرة</div>
+                        <div class="task-options">
+                            <button class="btn-opt btn-done" onclick="toggleTask(this, 'done')">أنجزت 🎉</button>
+                            <button class="btn-opt btn-not-done" onclick="toggleTask(this, 'not')">لم أنجز ⏱️</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column-center">
+            <div class="card" style="flex: 1;">
+                <div class="card-title"><i class="fa-solid fa-map-location-dot"></i> محطات الإنجاز المعرفي لبرنامج مِنطَاق</div>
+                <div class="station-list">
+                    
+                    <a href="https://youtu.be/LZDDYSvkTZc?si=svYmV8SFD4bs7N23" target="_blank" class="station-link-wrapper" onclick="playPop()">
+                        <div class="station-row st-wahi">
+                            <div class="station-details">
+                                <h4>نُورُ الوَحْي (سُورَة مُحَمَّد ﷺ)</h4>
+                                <p>اضغط للاستماع والتلاوة العذبة المعتمدة 📖</p>
+                            </div>
+                            <span class="status-badge bg-btn-wahi">استمع الآن <i class="fa-brands fa-youtube" style="margin-right:4px;"></i></span>
+                        </div>
+                    </a>
+
+                    <a href="https://drive.google.com/drive/folders/1V3TDxxXjISg5gCr3hs0QOcF8kBSqD8PE?usp=sharing" target="_blank" class="station-link-wrapper" onclick="playPop()">
+                        <div class="station-row st-farahidi">
+                            <div class="station-details">
+                                <h4>مُخْتَبَر الفَرَاهِيدِي</h4>
+                                <p>تفكيك البنية والاشتقاق اللغوي الثلاثي 🧪</p>
+                            </div>
+                            <span class="status-badge bg-btn-normal">مكتمل <i class="fa-solid fa-circle-check"></i></span>
+                        </div>
+                    </a>
+
+                    <a href="https://drive.google.com/drive/folders/1V3TDxxXjISg5gCr3hs0QOcF8kBSqD8PE?usp=sharing" target="_blank" class="station-link-wrapper" onclick="playPop()">
+                        <div class="station-row st-adab">
+                            <div class="station-details">
+                                <h4>جَوْلَةٌ فِي الأَدَب</h4>
+                                <p>الأنشطة المسرحية والتذوق البلاغي الفصيح 🎭</p>
+                            </div>
+                            <span class="status-badge bg-btn-normal">مكتمل <i class="fa-solid fa-circle-check"></i></span>
+                        </div>
+                    </a>
+
+                    <a href="https://drive.google.com/drive/folders/1V3TDxxXjISg5gCr3hs0QOcF8kBSqD8PE?usp=sharing" target="_blank" class="station-link-wrapper" onclick="playPop()">
+                        <div class="station-row st-estima">
+                            <div class="station-details">
+                                <h4>الاسْتِمَاعُ المُرَكَّز</h4>
+                                <p>مهارات الإنصات السمعي وتنمية الاستيعاب 🎧</p>
+                            </div>
+                            <span class="status-badge bg-btn-normal">مكتمل <i class="fa-solid fa-circle-check"></i></span>
+                        </div>
+                    </a>
+
+                    <a href="https://drive.google.com/drive/folders/1V3TDxxXjISg5gCr3hs0QOcF8kBSqD8PE?usp=sharing" target="_blank" class="station-link-wrapper" onclick="playPop()">
+                        <div class="station-row st-nadi">
+                            <div class="station-details">
+                                <h4>نَادِي القِرَاءَة</h4>
+                                <p>الانطلاق والطلاقة المسترسلة بدون تردد 📚</p>
+                            </div>
+                            <span class="status-badge bg-btn-normal">مكتمل <i class="fa-solid fa-circle-check"></i></span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="column-left">
+            <div class="card" style="height: 270px;">
+                <div class="card-title"><i class="fa-solid fa-gauge-high"></i> ماراثون القراءة (مؤشر السرعة)</div>
+                <div style="position: relative; height: 170px; width: 100%;">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card" style="flex: 1;">
+                <div class="card-title"><i class="fa-solid fa-magnifying-glass-chart"></i> التَّقْيِيمُ الفَرْدِيُّ المُرَكَّز</div>
+                <div class="feedback-box">
+                    <div class="feedback-item strength" id="str1" onclick="playPop()"></div>
+                    <div class="feedback-item strength" id="str2" onclick="playPop()"></div>
+                    <div class="feedback-item weakness" id="wk1" onclick="playPop()"></div>
+                    <div class="feedback-item weakness" id="wk2" onclick="playPop()"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. إدارة وتكثيف الفقاعات اللامعة والمشعة بانسجام مع الباليت الجديد
+    const balloonColors = ['#9EABA2', '#EECC8C', '#E8B298', '#D3A29D', '#A36361'];
+    function makeBalloon() {
+        const space = document.getElementById('balloonSpace');
+        if(!space) return;
+        const b = document.createElement('div');
+        b.className = 'balloon';
+        b.style.left = Math.random() * 100 + 'vw';
+        b.style.backgroundColor = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+        b.style.animationDuration = (Math.random() * 4 + 6) + 's'; 
+        space.appendChild(b);
+        setTimeout(() => b.remove(), 10000);
+    }
+    setInterval(makeBalloon, 900);
+
+    // 2. إدارة النظام الصوتي
+    window.addEventListener('DOMContentLoaded', () => {
+        document.body.addEventListener('mouseenter', () => {
+            document.getElementById('welcomeSound').play().catch(()=>{});
+        }, { once: true });
+    });
+
+    function playPop() {
+        const p = document.getElementById('popSound');
+        p.currentTime = 0;
+        p.play().catch(()=>{});
+    }
+
+    function toggleTask(button, type) {
+        playPop();
+        const parent = button.parentElement;
+        parent.querySelectorAll('.btn-opt').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+    }
+
+    const rootStyle = getComputedStyle(document.documentElement);
+    const stageNum = rootStyle.getPropertyValue('--CURRENT_STAGE').trim();
+    document.getElementById('stageNum').innerText = stageNum;
+
+    // 3. منحنى ماراثون القراءة المنسجم مع الألوان الجديدة
+    const growthDataPoints = [35, 60, 0, 0, 0, 0]; 
+    const ctx = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['الأسبوع ١', 'الأسبوع ٢', 'الأسبوع ٣', 'الأسبوع ٤', 'الأسبوع ٥', 'الأسبوع ٦'],
+            datasets: [{
+                data: growthDataPoints,
+                borderColor: '#A36361',
+                backgroundColor: 'rgba(163, 99, 97, 0.05)',
+                borderWidth: 4,
+                pointBackgroundColor: '#E8B298',
+                pointBorderColor: '#FFF',
+                pointRadius: 5,
+                tension: 0.3,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { min: 0, max: 100, ticks: { font: { family: 'Cairo', weight: 'bold', size: 11 }, color: '#3E3B39' } },
+                x: { ticks: { font: { family: 'Cairo', weight: 'bold', size: 11 }, color: '#3E3B39' } }
+            }
+        }
+    });
+</script>
+</body>
+</html>
