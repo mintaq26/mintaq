@@ -10,3 +10,12 @@
     }
   ]
 }
+{
+  "1001": {
+    "name": "سعيد بن محمد الهلالي",
+    "stage": 1,
+    "image": "images/mohammed.png",
+    "drive": "https://drive.google.com/xxxxx",
+    "speed": [35, 60, 0, 0, 0, 0]
+  }
+}
