@@ -1,6 +1,7 @@
 ﻿
 
 
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -571,17 +572,18 @@ async function loadStudent() {
     const students = await response.json();
 
     const student = students[studentId];
+
+if (!student) {
+    alert("الطالب غير موجود");
+    return;
+}
+
 document.documentElement.style.setProperty(
     '--STUDENT_NAME',
     `"${student.name}"`
 );
 
-    if (!student) {
-        alert("الطالب غير موجود");
-        return;
-    }
-
-    
+ document.querySelector(".student-name").textContent = student.name;   
 console.log(student.name);
 console.log(student.image);
 console.log(student.stage);
@@ -590,6 +592,8 @@ console.log(student.speed);
 console.log(document.querySelector(".student-name"));
 console.log(document.querySelector(".student-photo"));
 console.log(document.querySelector(".student-stage"));
+document.querySelector(".student-name").textContent =
+    student.name;
 }
 
 loadStudent();
