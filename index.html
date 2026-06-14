@@ -563,6 +563,8 @@ document.getElementById("stageNum").textContent =
 window.growthDataPoints = student.speed;
 const ctx = document.getElementById('growthChart').getContext('2d');
 console.log(window.growthDataPoints);
+
+console.log("Creating chart with:", student.speed);
     new Chart(ctx, {
         type: 'line',
         data: {
