@@ -532,34 +532,7 @@
 
     // 3. منحنى ماراثون القراءة المنسجم مع الألوان الجديدة
     
-    const ctx = document.getElementById('growthChart').getContext('2d');
-console.log(window.growthDataPoints);
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['الأسبوع ١', 'الأسبوع ٢', 'الأسبوع ٣', 'الأسبوع ٤', 'الأسبوع ٥', 'الأسبوع ٦'],
-            datasets: [{
-                data: window.growthDataPoints || [0,0,0,0,0,0],
-                borderColor: '#A36361',
-                backgroundColor: 'rgba(163, 99, 97, 0.05)',
-                borderWidth: 4,
-                pointBackgroundColor: '#E8B298',
-                pointBorderColor: '#FFF',
-                pointRadius: 5,
-                tension: 0.3,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { min: 0, max: 100, ticks: { font: { family: 'Cairo', weight: 'bold', size: 11 }, color: '#3E3B39' } },
-                x: { ticks: { font: { family: 'Cairo', weight: 'bold', size: 11 }, color: '#3E3B39' } }
-            }
-        }
-    });
+    
 </script>
 <script>
 async function loadStudent() {
@@ -588,6 +561,35 @@ async function loadStudent() {
 document.getElementById("stageNum").textContent =
     student.stage;
 window.growthDataPoints = student.speed;
+const ctx = document.getElementById('growthChart').getContext('2d');
+console.log(window.growthDataPoints);
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['الأسبوع ١', 'الأسبوع ٢', 'الأسبوع ٣', 'الأسبوع ٤', 'الأسبوع ٥', 'الأسبوع ٦'],
+            datasets: [{
+                data: [35,60,0,0,0,0],
+                borderColor: '#A36361',
+                backgroundColor: 'rgba(163, 99, 97, 0.05)',
+                borderWidth: 4,
+                pointBackgroundColor: '#E8B298',
+                pointBorderColor: '#FFF',
+                pointRadius: 5,
+                tension: 0.3,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { min: 0, max: 100, ticks: { font: { family: 'Cairo', weight: 'bold', size: 11 }, color: '#3E3B39' } },
+                x: { ticks: { font: { family: 'Cairo', weight: 'bold', size: 11 }, color: '#3E3B39' } }
+            }
+        }
+    });
+
 console.log(student.speed);
 console.log(window.growthDataPoints);
 
