@@ -528,9 +528,7 @@
         button.classList.add('active');
     }
 
-    const rootStyle = getComputedStyle(document.documentElement);
-    const stageNum = rootStyle.getPropertyValue('--CURRENT_STAGE').trim();
-    document.getElementById('stageNum').innerText = stageNum;
+    
 
     // 3. منحنى ماراثون القراءة المنسجم مع الألوان الجديدة
     const growthDataPoints = [35, 60, 0, 0, 0, 0]; 
@@ -586,6 +584,8 @@ async function loadStudent() {
 
     document.querySelector(".student-photo").src =
         student.image;
+document.getElementById("stageNum").textContent =
+    student.stage;
 }
 
 
