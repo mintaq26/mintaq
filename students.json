@@ -11,7 +11,7 @@
   "1002": {
     "name": "أحمد",
     "title": "نجم القراءة المتألق ⭐",
-    "stage": 2,
+    "stage":5,
     "image": "images/mohammed.png",
     "drive": "https://drive.google.com/yyyyy",
     "speed": [50,55,60,65,70,75]
