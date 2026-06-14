@@ -573,39 +573,21 @@ async function loadStudent() {
 
     const student = students[studentId];
 
-if (!student) {
-    alert("الطالب غير موجود");
-    return;
+    if (!student) {
+        alert("الطالب غير موجود");
+        return;
+    }
+
+    document.querySelector(".student-name").textContent =
+        student.name;
+
+    document.querySelector(".student-title").textContent =
+        student.title;
 }
 
-document.documentElement.style.setProperty(
-    '--STUDENT_NAME',
-    `"${student.name}"`
-);
-
- document.querySelector(".student-name").textContent = student.name;   
-console.log("اسم الطالب:", student.name);
-
-const nameElement = document.querySelector(".student-name");
-console.log("العنصر:", nameElement);
-
-if (nameElement) {
-    nameElement.textContent = student.name;
-    nameElement.style.border = "3px solid red";
-}
-console.log(student.name);
-console.log(student.image);
-console.log(student.stage);
-console.log(student.drive);
-console.log(student.speed);
-console.log(document.querySelector(".student-name"));
-console.log(document.querySelector(".student-photo"));
-console.log(document.querySelector(".student-stage"));
-document.querySelector(".student-name").textContent =
-    student.name;
-}
 
 loadStudent();
+
 </script>
 </body>
 
