@@ -2,18 +2,22 @@
 {
   "1001": {
     "name": "سعيد بن محمد الهلالي",
+    "title": "البطل اللغوي الواعد 🎯",
     "stage": 1,
-    "image": "images/mohammed.png",
+    "image": "images/seed.jpeg",
     "drive": "https://drive.google.com/xxxxx",
-    "speed": [35, 60, 0, 0, 0, 0]
+    "speed": [35,60,0,0,0,0]
   }
+}
   ,
 
+{
   "1002": {
-    "name": " أحمد بن سالم العلوي",
+    "name": "أحمد",
+    "title": "نجم القراءة المتألق ⭐",
     "stage": 2,
     "image": "images/seed.jpeg",
     "drive": "https://drive.google.com/yyyyy",
-    "speed": [50, 55, 60, 65, 70, 75]
+    "speed": [50,55,60,65,70,75]
   }
 }
