@@ -531,14 +531,15 @@
     
 
     // 3. منحنى ماراثون القراءة المنسجم مع الألوان الجديدة
-    const growthDataPoints = [35, 60, 0, 0, 0, 0]; 
+    
     const ctx = document.getElementById('growthChart').getContext('2d');
+console.log(window.growthDataPoints);
     new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['الأسبوع ١', 'الأسبوع ٢', 'الأسبوع ٣', 'الأسبوع ٤', 'الأسبوع ٥', 'الأسبوع ٦'],
             datasets: [{
-                data: growthDataPoints,
+                data: window.growthDataPoints || [0,0,0,0,0,0],
                 borderColor: '#A36361',
                 backgroundColor: 'rgba(163, 99, 97, 0.05)',
                 borderWidth: 4,
@@ -586,6 +587,8 @@ async function loadStudent() {
         student.image;
 document.getElementById("stageNum").textContent =
     student.stage;
+window.growthDataPoints = student.speed;
+
 }
 
 
