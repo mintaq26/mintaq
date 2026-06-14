@@ -584,6 +584,15 @@ document.documentElement.style.setProperty(
 );
 
  document.querySelector(".student-name").textContent = student.name;   
+console.log("اسم الطالب:", student.name);
+
+const nameElement = document.querySelector(".student-name");
+console.log("العنصر:", nameElement);
+
+if (nameElement) {
+    nameElement.textContent = student.name;
+    nameElement.style.border = "3px solid red";
+}
 console.log(student.name);
 console.log(student.image);
 console.log(student.stage);
