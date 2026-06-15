@@ -561,7 +561,21 @@ async function loadStudent() {
         student.image;
 document.getElementById("stageNum").textContent =
     student.stage;
-window.growthDataPoints = student.speed;
+
+
+document.getElementById("str1").textContent =
+    student.strengths[0];
+
+document.getElementById("str2").textContent =
+    student.strengths[1];
+
+document.getElementById("wk1").textContent =
+    student.weaknesses[0];
+
+document.getElementById("wk2").textContent =
+    student.weaknesses[1];
+
+
 const ctx = document.getElementById('growthChart').getContext('2d');
 
 
