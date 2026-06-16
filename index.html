@@ -3,6 +3,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -425,7 +426,10 @@
                         </div>
                     </a>
 
-                    <a href="https://drive.google.com/drive/folders/1V3TDxxXjISg5gCr3hs0QOcF8kBSqD8PE?usp=sharing" target="_blank" class="station-link-wrapper" onclick="playPop()">
+                   <a href="#"
+target="_blank"
+class="station-link-wrapper student-drive"
+onclick="playPop()">
                         <div class="station-row st-farahidi">
                             <div class="station-details">
                                 <h4>مُخْتَبَر الفَرَاهِيدِي</h4>
@@ -435,7 +439,10 @@
                         </div>
                     </a>
 
-                    <a href="https://drive.google.com/drive/folders/1V3TDxxXjISg5gCr3hs0QOcF8kBSqD8PE?usp=sharing" target="_blank" class="station-link-wrapper" onclick="playPop()">
+                   <a href="#"
+target="_blank"
+class="station-link-wrapper student-drive"
+onclick="playPop()">
                         <div class="station-row st-adab">
                             <div class="station-details">
                                 <h4>جَوْلَةٌ فِي الأَدَب</h4>
@@ -445,8 +452,10 @@
                         </div>
                     </a>
 
-                    <a href="https://drive.google.com/drive/folders/1V3TDxxXjISg5gCr3hs0QOcF8kBSqD8PE?usp=sharing" target="_blank" class="station-link-wrapper" onclick="playPop()">
-                        <div class="station-row st-estima">
+                   <a href="#"
+target="_blank"
+class="station-link-wrapper student-drive"
+onclick="playPop()">  <div class="station-row st-estima">
                             <div class="station-details">
                                 <h4>الاسْتِمَاعُ المُرَكَّز</h4>
                                 <p>مهارات الإنصات السمعي وتنمية الاستيعاب 🎧</p>
@@ -455,8 +464,10 @@
                         </div>
                     </a>
 
-                    <a href="https://drive.google.com/drive/folders/1V3TDxxXjISg5gCr3hs0QOcF8kBSqD8PE?usp=sharing" target="_blank" class="station-link-wrapper" onclick="playPop()">
-                        <div class="station-row st-nadi">
+                   <a href="#"
+target="_blank"
+class="station-link-wrapper student-drive"
+onclick="playPop()">    <div class="station-row st-nadi">
                             <div class="station-details">
                                 <h4>نَادِي القِرَاءَة</h4>
                                 <p>الانطلاق والطلاقة المسترسلة بدون تردد 📚</p>
@@ -556,6 +567,15 @@ async function loadStudent() {
 
     document.querySelector(".student-photo").src =
         student.image;
+
+document
+.querySelectorAll(".student-drive")
+
+.forEach(link => {
+
+link.href = student.drive;
+
+});
 document.getElementById("stageNum").textContent =
     student.stage;
 
