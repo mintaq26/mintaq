@@ -394,14 +394,14 @@
                 <div class="card-title"><i class="fa-solid fa-cubes"></i> مهام نهاية الأسبوع</div>
                 <div class="tasks-grid">
                     <div class="task-box">
-                        <div class="task-title-text">📖 مراجعة الآيات من ١-٥</div>
+                        <div class="task-title-text" id="task1"></div>
                         <div class="task-options">
                             <button class="btn-opt btn-done" onclick="toggleTask(this, 'done')">أنجزت 🎉</button>
                             <button class="btn-opt btn-not-done" onclick="toggleTask(this, 'not')">لم أنجز ⏱️</button>
                         </div>
                     </div>
                     <div class="task-box">
-                        <div class="task-title-text">📚 قراءة قصة قصيرة</div>
+                        <div class="task-title-text" id="task2"></div>
                         <div class="task-options">
                             <button class="btn-opt btn-done" onclick="toggleTask(this, 'done')">أنجزت 🎉</button>
                             <button class="btn-opt btn-not-done" onclick="toggleTask(this, 'not')">لم أنجز ⏱️</button>
@@ -592,6 +592,11 @@ document.getElementById("wk1").textContent =
 document.getElementById("wk2").textContent =
     student.weaknesses[1];
 
+document.getElementById("task1").textContent =
+student.tasks[0];
+
+document.getElementById("task2").textContent =
+student.tasks[1];
 
 const ctx = document.getElementById('growthChart').getContext('2d');
 
