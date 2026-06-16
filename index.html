@@ -549,7 +549,9 @@ async function loadStudent() {
     const params = new URLSearchParams(window.location.search);
     const studentId = params.get("id") || "1001";
 
-    const response = await fetch("students.json");
+    const response = await fetch(
+"students.json?v=" + Date.now()
+);
     const students = await response.json();
 
     const student = students[studentId];
