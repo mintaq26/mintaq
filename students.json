@@ -3,7 +3,7 @@
     "name": "سعيد بن محمد الهلالي",
     "title": "البطل اللغوي الواعد 🎯",
     "stage": 1,
-    "image": "images/seed.jpeg",
+    "image": "images/1001.jpg",
     "drive": "https://drive.google.com/1",
     "speed": [
       35,
@@ -30,7 +30,7 @@
     "name": "أحمد بن سالم الحارثي",
     "title": "نجم القراءة المتألق ⭐",
     "stage": 2,
-    "image": "images/mohammed.png",
+    "image": "images/1002.jpg",
     "drive": "https://drive.google.com/2",
     "speed": [
       50,
@@ -120,6 +120,33 @@
       60,
       70,
       80
+    ],
+    "strengths": [
+      "نطق سليم 🔊",
+      "ثقة بالنفس 🌟"
+    ],
+    "weaknesses": [
+      "زيادة التدريب 📚",
+      "التركيز على المدود 🎯"
+    ],
+    "tasks": [
+      "📖 مراجعة الكلمات",
+      "📚 قراءة فقرة جديدة"
+    ]
+  },
+  "1006": {
+    "name": "عبدالله بن محمد بن سعيد الهلالي ",
+    "title": "سفير الحروف الذهبية 🌟",
+    "stage": 2,
+    "image": "images/seed.jpeg",
+    "drive": "https://drive.google.com/5",
+    "speed": [
+      30,
+      20,
+      30,
+      40,
+      20,
+      20
     ],
     "strengths": [
       "نطق سليم 🔊",
