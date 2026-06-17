@@ -708,7 +708,18 @@ id="qr${id}">
 
 </div>
 
+<button
+
+class="save-btn"
+
+onclick="saveOneCard(this)">
+
+📷 حفظ البطاقة
+
+</button>
+
 `;
+
 
 
 
@@ -745,7 +756,89 @@ height:120
 });
 
 }
+async function saveOneCard(button){
 
+const card=
+
+button.closest(
+
+".student-card"
+
+);
+
+button.style.display="none";
+
+try{
+
+const canvas=
+
+await html2canvas(
+
+card,
+
+{
+
+scale:3,
+
+useCORS:true,
+
+backgroundColor:"#ffffff"
+
+}
+
+);
+
+const studentName=
+
+card.querySelector(
+
+".student-name"
+
+)
+
+.innerText
+
+.trim();
+
+const link=
+
+document.createElement(
+
+"a"
+
+);
+
+link.download=
+
+`${studentName}.png`;
+
+link.href=
+
+canvas.toDataURL(
+
+"image/png"
+
+);
+
+link.click();
+
+}
+
+catch(error){
+
+alert(
+
+"حدث خطأ أثناء الحفظ"
+
+);
+
+console.log(error);
+
+}
+
+button.style.display="block";
+
+}
 </script>
 
 </body>
